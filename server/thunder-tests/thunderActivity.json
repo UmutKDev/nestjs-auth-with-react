@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "1ccae719-9a42-4747-b3d5-35a6f974fcb8",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/profile",
+    "url": "http://localhost:3000/profile",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-09T19:33:01.281Z",
+    "modified": "2023-03-09T19:35:23.183Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY3ODM5MDUxMCwiZXhwIjoxNjc4MzkwNTcwfQ.xswivYktIgq5NNw5ldOKIwehVOPOFv_2ZKv957Xo_00"
+    },
+    "tests": []
+  },
+  {
+    "_id": "a271a510-dc69-4237-b7e7-9af3107d0741",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/auth/login",
+    "url": "http://localhost:3000/auth/login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-09T19:33:43.155Z",
+    "modified": "2023-03-09T19:34:36.254Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"username\": \"john\", \"password\": \"changeme\"}",
+      "form": []
+    },
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "john",
+        "password": "changeme"
+      }
+    },
+    "tests": []
+  }
+]

@@ -1,81 +1,80 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+import axios from "axios";
 
 function App() {
-
-  const [user, setUser] = useState<any>(null)
-
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    const accessToken = document.cookie.split(';').find((cookie) => cookie.includes('access_token'))
-    console.log(accessToken)
+    const accessToken = document.cookie
+      .split(";")
+      .find((cookie) => cookie.includes("access_token"));
     if (accessToken) {
-      fetch('http://localhost:3000/profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken.split('=')[1]}`
-        },
-      }).then((response) => response.json())
-        .then((data) => {
-          console.log('Success:', data);
-          setUser(data)
+      const token = accessToken.split("=")[1];
+      axios
+        .get("http://localhost:3000/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setUser(response.data);
         })
         .catch((error) => {
-          console.error('Error:', error);
-        }
-        );
+          if (error.response.status === 401) {
+            document.cookie = `access_token=;max-age=0`;
+          }
+          console.log(error);
+        });
     }
-  }, [])
-
+  }, []);
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    const username = formData.get('username')
-    const password = formData.get('password')
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const username = formData.get("username");
+    const password = formData.get("password");
 
-    fetch('http://localhost:3000/auth/login', {
-      method: 'POST',
+    fetch("http://localhost:3000/auth/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        'username': username,
-        'password': password,
+        username: username,
+        password: password,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
+        console.log("Success:", data);
         if (data.success) {
-          document.cookie = `access_token=${data.access_token};max-age=3600`
-          fetch('http://localhost:3000/profile', {
-            method: 'GET',
+          document.cookie = `access_token=${data.access_token};max-age=3600`;
+          fetch("http://localhost:3000/profile", {
+            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${data.access_token}`
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${data.access_token}`,
             },
-          }).then((response) => response.json())
+          })
+            .then((response) => response.json())
             .then((data) => {
-              console.log('Success:', data);
-              setUser(data)
+              console.log("Success:", data);
+              setUser(data);
             })
             .catch((error) => {
-              console.error('Error:', error);
-            }
-            );
+              console.error("Error:", error);
+            });
         } else {
-          alert('Login failed')
+          alert("Login failed");
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
-  }
-
+  };
 
   return (
     <>
@@ -87,7 +86,6 @@ function App() {
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
           </div>
-
         </>
       ) : (
         <>
@@ -96,11 +94,10 @@ function App() {
             password: <input type="password" name="password" />
             <button type="submit">Login</button>
           </form>
-
         </>
       )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

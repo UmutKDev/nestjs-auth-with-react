@@ -8,12 +8,15 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2023-03-10T00:31:01.383Z",
-    "modified": "2023-03-10T00:31:08.002Z",
+    "modified": "2023-03-14T02:17:06.382Z",
     "headers": [],
     "params": [],
     "auth": {
-      "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY3ODQwODA0MSwiZXhwIjoxNjc4NDA4MTAxfQ.D25nxfGfI4ezdKXojQUdVpKCPytbJsTDBjBghmajnAU"
+      "type": "basic",
+      "basic": {
+        "username": "testrewgwe",
+        "password": "123tyjtjyt"
+      }
     },
     "tests": []
   }
